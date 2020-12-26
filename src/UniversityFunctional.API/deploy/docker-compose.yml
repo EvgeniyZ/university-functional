@@ -1,0 +1,27 @@
+version: '3.3'
+networks:
+  backend:
+
+services:
+  postgres:
+    ports:
+        - 5432:5432
+    image: postgres
+    networks:
+      - backend
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: SuperSecret!Passw0rd
+      POSTGRES_USER: postgres
+
+  university:
+    ports:
+      - "5030:5000"
+    image: university
+    networks:
+      - backend
+    volumes:
+      - ./logs/university/:/opt/app/logs/
+    depends_on:
+      - "postgres"
+    restart: unless-stopped
