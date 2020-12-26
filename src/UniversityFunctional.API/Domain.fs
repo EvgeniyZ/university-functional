@@ -45,3 +45,26 @@ type University =
     { Id: UniversityId
       Name: string
       BuiltDate: BuiltDate }
+
+type Command<'data> =
+    { Data: 'data
+      Timestamp: DateTime
+      UserId: string }
+
+type NewStudent =
+    { FirstName: string
+      LastName: string
+      Age: int }
+
+type UpdateStudent =
+    { Id: int
+      FirstName: string
+      LastName: string
+      Age: StudentAge
+      CourseId: int
+      AdmissionYear: DateTime
+      ReleaseYear: DateTime }
+
+type CreateStudentCommand = Command<NewStudent>
+type UpdateStudentCommand = Command<UpdateStudent>
+type DeleteStudentCommand = Command<int>
